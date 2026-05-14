@@ -1,6 +1,12 @@
-# 语音合成 TTS 插件
+# 🎙️ Hanako TTS
 
-基于 [硅基流动 SiliconFlow](https://siliconflow.cn) CosyVoice2-0.5B 模型的文本转语音插件，为 OpenHanako Agent 提供语音输出能力。
+> 基于硅基流动 CosyVoice2-0.5B 的 OpenHanako 文本转语音插件
+
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Hanako](https://img.shields.io/badge/Hanako-%3E%3D0.158.0-6c5ce7)](https://github.com/liliMozi/openhanako)
+[![Node](https://img.shields.io/badge/node-%3E%3D20-339933)](https://nodejs.org)
+
+为 OpenHanako Agent 提供语音输出能力。支持音色绑定、情感 Prompt 控制、自动语音策略，让 AI 助手真正「说」出话来。
 
 ## 功能特性
 
