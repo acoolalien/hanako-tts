@@ -162,15 +162,31 @@ plugins/tts/
 
 ## 依赖
 
-- **TTS API**：[SiliconFlow CosyVoice2-0.5B](https://docs.siliconflow.cn/cn/userguide/capabilities/text-to-speech)
-- **计费**：$7.15 / 百万 UTF-8 字节（输入文本长度）
-- **无需本地模型**，纯云端调用
+### 运行时
 
-## 兼容性
+| 依赖 | 版本 | 用途 |
+|------|------|------|
+| [Hanako](https://github.com/liliMozi/openhanako) | >= 0.158.0 | 插件宿主 |
+| Node.js | >= 20 | 原生 `fetch` API |
 
-- Hanako >= 0.158.0
-- Node.js >= 20（使用原生 `fetch`）
+### 外部服务
 
-## License
+| 服务 | 说明 |
+|------|------|
+| [SiliconFlow](https://siliconflow.cn) | CosyVoice2-0.5B 语音合成 API |
 
-MIT
+**无需 npm 依赖**。插件仅使用 Node.js 内置模块（`fs`、`path`、`fetch`）。
+
+### 计费
+
+按输入文本的 UTF-8 字节数计费，当前 $7.15 / 百万字节。详见 [SiliconFlow 定价](https://siliconflow.cn/pricing)。
+
+### 兼容性
+
+| 环境 | 状态 |
+|------|------|
+| Hanako >= 0.158.0 | ✅ 完整支持 |
+| Hanako < 0.158.0 | ❌ 不支持（缺少原生 fetch） |
+| Windows | ✅ |
+| macOS | ✅ |
+| Linux | ✅ |
