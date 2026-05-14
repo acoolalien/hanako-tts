@@ -1,0 +1,8 @@
+# generated audio
+*.mp3
+*.wav
+*.opus
+
+# OS
+.DS_Store
+Thumbs.db

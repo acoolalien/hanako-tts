@@ -1,0 +1,15 @@
+{
+  "manifestVersion": 1,
+  "id": "tts",
+  "name": "语音合成",
+  "version": "1.0.0",
+  "description": "基于硅基流动 CosyVoice2 的文本转语音插件，支持 Agent 音色绑定、情感 prompt 控制、自动语音策略。",
+  "minAppVersion": "0.158.0",
+  "trust": "full-access",
+  "contributions": {
+    "tools": ["generate_speech"],
+    "commands": ["tts_speak", "tts_config"],
+    "routes": true,
+    "lifecycle": true
+  }
+}
