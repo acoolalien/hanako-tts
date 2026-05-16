@@ -49,7 +49,7 @@
 node scripts/tts-config.mjs set-defaults
 ```
 
-这会写入所有默认值：硅基流动后端、语速 1.0、策略 normal、以及五个默认 Agent 的音色绑定。
+这会写入全局默认值：硅基流动后端、语速 1.0、策略 normal。Agent 个性化配置需手动添加（见下方）。
 
 ### 4. 修改配置
 
@@ -58,7 +58,7 @@ node scripts/tts-config.mjs set-defaults
 node scripts/tts-config.mjs show
 
 # 修改单个选项
-node scripts/tts-config.mjs set defaultStrategy=aggressive agent.hanako.voice=anna
+node scripts/tts-config.mjs set defaultStrategy=aggressive agent.<id>.voice=anna
 ```
 
 支持三层配置：全局（`defaultBackend` / `defaultSpeed` / `defaultStrategy`）、Agent（`agent.<id>.voice` 等）、后端（`backend.<id>.apiBase` 等）。

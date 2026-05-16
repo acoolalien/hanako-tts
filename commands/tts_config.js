@@ -50,7 +50,7 @@ export async function execute(rawArgs, cmdCtx) {
       }
     }
 
-    // Agent-level fields: /tts_config agent.hanako.voice=anna
+    // Agent-level fields: /tts_config agent.<id>.voice=anna
     for (const [rawKey, rawVal] of Object.entries(args)) {
       const match = rawKey.match(/^agent\.(.+?)\.(.+)$/);
       if (!match) continue;

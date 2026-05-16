@@ -104,20 +104,12 @@ function setConfig(pairs) {
 }
 
 function setDefaults() {
-  const cfg = {
-    defaultBackend: "siliconflow",
-    defaultSpeed: 1.0,
-    defaultStrategy: "normal",
-    agents: {
-      hanako:   { voice: "anna", speed: 1.0, strategy: "normal" },
-      wenwen:   { voice: "diana", strategy: "normal" },
-      "wenwen-2": { voice: "bella", strategy: "normal" },
-      xiaqi:    { voice: "claire", speed: 0.9, strategy: "aggressive", prompt: "用一种温柔带喘、黏糊糊的撒娇语气说" },
-      chengxu:  { voice: "alex", strategy: "conservative" },
-    },
-  };
+  const cfg = loadConfig();
+  cfg.defaultBackend = cfg.defaultBackend || "siliconflow";
+  cfg.defaultSpeed = cfg.defaultSpeed ?? 1.0;
+  cfg.defaultStrategy = cfg.defaultStrategy || "normal";
   saveConfig(cfg);
-  console.log("默认配置已写入\n");
+  console.log("全局默认配置已写入（不影响已有 Agent 配置）\n");
   printConfig(cfg);
 }
 
@@ -129,7 +121,7 @@ if (cmd === "show" || !cmd) {
   const pairs = process.argv.slice(3);
   if (pairs.length === 0) {
     console.log("用法: node scripts/tts-config.mjs set key=value ...");
-    console.log("示例: node scripts/tts-config.mjs set defaultBackend=siliconflow agent.hanako.voice=anna");
+    console.log("示例: node scripts/tts-config.mjs set defaultBackend=siliconflow agent.<id>.voice=anna");
     process.exit(1);
   }
   setConfig(pairs);
@@ -140,7 +132,7 @@ if (cmd === "show" || !cmd) {
   console.log("可用命令: show | set | set-defaults");
   console.log("示例:");
   console.log("  node scripts/tts-config.mjs show");
-  console.log("  node scripts/tts-config.mjs set defaultStrategy=aggressive agent.hanako.voice=anna");
+  console.log("  node scripts/tts-config.mjs set defaultStrategy=aggressive agent.<id>.voice=anna");
   console.log("  node scripts/tts-config.mjs set-defaults");
   process.exit(1);
 }
