@@ -28,7 +28,7 @@ export async function execute(rawArgs, cmdCtx) {
 
     const buffer = await generateSpeech({ text, voice, speed, gain, agentId }, console);
 
-    const outDir = path.join(dataDir(), "plugin-data", "tts");
+    const outDir = dataDir();
     await fs.promises.mkdir(outDir, { recursive: true });
     const filePath = path.join(outDir, `speech_${Date.now()}.mp3`);
     await fs.promises.writeFile(filePath, buffer);
