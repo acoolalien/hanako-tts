@@ -1,4 +1,5 @@
 // 语音策略注入 — 监听 before_agent_start，按 Agent 配置注入语音行为指令
+import path from "node:path";
 import { loadConfig } from "../lib/tts-core.js";
 
 const STRATEGY_PROMPTS = {
@@ -33,13 +34,29 @@ const STRATEGY_PROMPTS = {
 };
 
 /**
+ * 从 Hanako session 文件路径中提取 agent ID。
+ * 路径模式：.../agents/<agentId>/(sessions|activity)/<sessionFile>.jsonl
+ */
+function extractAgentId(sessionPath) {
+  if (!sessionPath) return null;
+  const segments = sessionPath.replace(/\\/g, "/").split("/");
+  const idx = segments.indexOf("sessions");
+  if (idx > 0) return segments[idx - 1];
+  const oldIdx = segments.indexOf("activity");
+  if (oldIdx > 0) return segments[oldIdx - 1];
+  return null;
+}
+
+/**
  * @param {object} pi - Pi SDK ExtensionAPI
  */
 export default function (pi) {
-  pi.on("before_agent_start", (event) => {
+  pi.on("before_agent_start", (event, ctx) => {
     try {
       const cfg = loadConfig();
-      const agentId = event?.agentId || event?.agent?.id || null;
+      const sessionPath =
+        ctx?.sessionManager?.getSessionFile?.() || null;
+      const agentId = extractAgentId(sessionPath);
 
       if (!agentId) return;
 
@@ -49,21 +66,7 @@ export default function (pi) {
 
       if (!prompt) return;
 
-      // 注入 system message
-      const systemMsg = { role: "system", content: prompt };
-      if (Array.isArray(event.messages)) {
-        // 插在 system prompt 区域的末尾
-        const lastSystemIdx = event.messages.reduce(
-          (last, m, i) => (m.role === "system" ? i : last), -1
-        );
-        if (lastSystemIdx >= 0) {
-          event.messages.splice(lastSystemIdx + 1, 0, systemMsg);
-        } else {
-          event.messages.unshift(systemMsg);
-        }
-      }
-
-      return event;
+      return { systemPrompt: (event.systemPrompt || "") + "\n\n" + prompt };
     } catch (_) {
       // 注入失败不影响主流程
     }
