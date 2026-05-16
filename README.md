@@ -63,7 +63,15 @@ node scripts/tts-config.mjs set defaultStrategy=aggressive agent.<id>.voice=anna
 
 支持三层配置：全局（`defaultBackend` / `defaultSpeed` / `defaultStrategy`）、Agent（`agent.<id>.voice` 等）、后端（`backend.<id>.apiBase` 等）。
 
-### 5. 重启 Hanako
+### 5. 让 AI 帮你配置（推荐）
+
+API Key 就位后，直接在对话中告诉 Agent：
+
+> 帮我把 TTS 配置好，查一下我的 Agent 列表，给每个 Agent 推荐合适的音色和策略
+
+Agent 会读取你的 Agent 信息，用 `scripts/tts-config.mjs` 自动完成个性化配置，省去手动查 ID、选音色的麻烦。
+
+### 6. 重启 Hanako
 
 插件自动加载，配置热生效。
 
