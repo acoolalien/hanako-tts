@@ -2,14 +2,66 @@
   "manifestVersion": 1,
   "id": "tts",
   "name": "语音合成",
-  "version": "1.0.0",
-  "description": "基于硅基流动 CosyVoice2 的文本转语音插件，支持 Agent 音色绑定、情感 prompt 控制、自动语音策略。",
+  "version": "2.0.0",
+  "description": "Hanako 文本转语音插件，支持多后端、Agent 音色绑定、情感控制与自动语音策略",
   "minAppVersion": "0.158.0",
   "trust": "full-access",
-  "contributions": {
+  "contributes": {
     "tools": ["generate_speech"],
     "commands": ["tts_speak", "tts_config"],
+    "providers": ["siliconflow-tts", "volcengine-tts"],
+    "extensions": ["speech-strategy"],
     "routes": true,
-    "lifecycle": true
+    "lifecycle": true,
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "defaultBackend": {
+          "title": "默认后端",
+          "type": "string",
+          "default": "siliconflow",
+          "enum": ["siliconflow", "volcengine"],
+          "description": "选择默认的 TTS 服务后端"
+        },
+        "defaultSpeed": {
+          "title": "默认语速",
+          "type": "number",
+          "default": 1.0,
+          "description": "全局默认语速，范围 0.25~4.0"
+        },
+        "defaultStrategy": {
+          "title": "默认语音策略",
+          "type": "string",
+          "default": "normal",
+          "enum": ["aggressive", "normal", "conservative"],
+          "description": "全局默认语音策略级别"
+        },
+        "voice": {
+          "title": "音色",
+          "type": "string",
+          "scope": "per-agent",
+          "description": "Agent 使用的音色 ID，如 anna、bella"
+        },
+        "speed": {
+          "title": "语速",
+          "type": "number",
+          "scope": "per-agent",
+          "description": "Agent 语速，覆盖全局默认"
+        },
+        "strategy": {
+          "title": "语音策略",
+          "type": "string",
+          "enum": ["aggressive", "normal", "conservative"],
+          "scope": "per-agent",
+          "description": "Agent 语音策略级别，覆盖全局默认"
+        },
+        "prompt": {
+          "title": "情感指令",
+          "type": "string",
+          "scope": "per-agent",
+          "description": "Agent 默认情感 prompt，如「用撒娇的语气说」"
+        }
+      }
+    }
   }
 }

@@ -1,37 +1,16 @@
 // /tts_speak command — quick voice generation
 import path from "node:path";
 import fs from "node:fs";
-import { generateSpeech, loadConfig, resolveVoice, resolveSpeed, resolveGain, dataDir, VOICES } from "../lib/tts-core.js";
+import { generateSpeech, loadConfig, resolveVoice, resolveSpeed, resolveGain, dataDir, parseArgs, VOICES } from "../lib/tts-core.js";
 
 export const name = "tts_speak";
 export const description = "使用语音朗读指定文本";
 export const permission = "anyone";
 export const usage = "/tts_speak <文本> [voice=音色] [speed=语速] [gain=增益]";
 
-function parseArgs(raw) {
-  if (!raw) return {};
-  const parts = raw.split(/\s+/);
-  const args = {};
-  const positional = [];
-  for (const part of parts) {
-    const eq = part.indexOf("=");
-    if (eq > 0) {
-      const k = part.slice(0, eq);
-      const v = part.slice(eq + 1);
-      args[k] = isNaN(Number(v)) ? v : Number(v);
-    } else {
-      positional.push(part);
-    }
-  }
-  if (positional.length > 0) {
-    args.text = positional.join(" ");
-  }
-  return args;
-}
-
-export async function handler(ctx) {
+export async function execute(rawArgs, cmdCtx) {
   try {
-    const args = parseArgs(ctx.args);
+    const args = parseArgs(rawArgs);
     const text = args.text || "";
 
     if (!text || !text.trim()) {
@@ -42,7 +21,7 @@ export async function handler(ctx) {
     }
 
     const cfg = loadConfig();
-    const agentId = ctx?.agent?.id || null;
+    const agentId = cmdCtx?.agentId || null;
     const voice = resolveVoice(args.voice, agentId, cfg);
     const speed = resolveSpeed(args.speed, agentId, cfg);
     const gain = resolveGain(args.gain, agentId, cfg);
