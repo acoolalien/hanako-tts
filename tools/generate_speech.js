@@ -3,7 +3,7 @@ import path from "node:path";
 import fs from "node:fs";
 import { generateSpeech, loadConfig, resolveVoice, resolveSpeed, resolveGain, VOICES } from "../lib/tts-core.js";
 
-export const name = "generate_speech";
+export const name = "tts_generate_speech";
 export const description =
   "将文本转换为语音文件，输出 mp3 音频，自动通过卡片播放。可用音色: anna/bella/claire/diana/alex/benjamin/charles/david";
 

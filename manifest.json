@@ -7,7 +7,7 @@
   "minAppVersion": "0.158.0",
   "trust": "full-access",
   "contributes": {
-    "tools": ["generate_speech"],
+    "tools": ["tts_generate_speech"],
     "commands": ["tts_speak", "tts_config"],
     "providers": ["siliconflow-tts", "volcengine-tts"],
     "extensions": ["speech-strategy"],

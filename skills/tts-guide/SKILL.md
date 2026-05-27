@@ -1,11 +1,11 @@
 # TTS 语音合成使用指南
 
 为 Agent 提供文本转语音能力。语音路由自动按 Agent 匹配音色，支持情感 prompt 控制语调。
-MANDATORY TRIGGERS: 语音合成, TTS, 朗读, 语音, 音色, 情感路由, 情感指令, 情感控制, 情感prompt, 语音生成, 说话语气, 配音, 语音输出, 念出来, 念一下, 读出来, tts_generate_speech, 语音参数, 语调控制, prompt情感, 撒娇语气, 带喘, 黏糊糊语气
+MANDATORY TRIGGERS: 语音合成, TTS, 朗读, 语音, 音色, 情感路由, 情感指令, 情感控制, 情感prompt, 语音生成, 说话语气, 配音, 语音输出, 念出来, 念一下, 读出来, tts_tts_generate_speech, 语音参数, 语调控制, prompt情感, 撒娇语气, 带喘, 黏糊糊语气
 
 ## 调用方式
 
-调用工具 `tts_generate_speech`，只需传 `text`，其余参数自动从配置解析：
+调用工具 `tts_tts_generate_speech`，只需传 `text`，其余参数自动从配置解析：
 
 | 参数 | 类型 | 说明 |
 |------|------|------|
@@ -134,10 +134,10 @@ conservative:
 
 ```js
 // 普通调用（自动匹配音色和策略）
-tts_generate_speech({ text: "公子，该休息了" })
+tts_tts_generate_speech({ text: "公子，该休息了" })
 
 // 带情感控制
-tts_generate_speech({ 
+tts_tts_generate_speech({ 
   text: "你轻点……我还没准备好", 
   prompt: "用害羞又带喘的声音说",
   speed: 0.9
@@ -145,7 +145,7 @@ tts_generate_speech({
 
 // 长回复总结（自动判断）
 // 你的回复有 800 字时，自动生成一次带总结文案的调用
-tts_generate_speech({ 
+tts_tts_generate_speech({ 
   text: "简单来说：你问的那个问题核心在于缓存没刷新，清一下就好。详细内容你看上面。"
 })
 ```

@@ -6,3 +6,6 @@
 # OS
 .DS_Store
 Thumbs.db
+
+# nested copy (older project structure)
+tts-dev/
