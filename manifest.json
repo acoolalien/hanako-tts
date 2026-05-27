@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "tts",
   "name": "语音合成",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Hanako 文本转语音插件，支持多后端、Agent 音色绑定、情感控制与自动语音策略",
   "minAppVersion": "0.158.0",
   "trust": "full-access",

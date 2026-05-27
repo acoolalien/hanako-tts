@@ -1,6 +1,6 @@
 {
   "name": "hanako-tts",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": true,
   "type": "module",
   "description": "Hanako 文本转语音插件，支持多后端、Agent 音色绑定、情感控制与自动语音策略",
